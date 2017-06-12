@@ -1,5 +1,7 @@
 package com.example.chory.snakes.engine;
 
+import android.view.SurfaceHolder;
+
 import com.example.chory.snakes.classes.Coordinate;
 import com.example.chory.snakes.enums.Direction;
 import com.example.chory.snakes.enums.GameState;
@@ -12,14 +14,14 @@ import java.util.List;
  * Created by chory on 6/10/2017.
  */
 
-public class GameEngine {
+public class GameEngine{
     public static final int GameWidth = 28;
     public static final int GameHeight = 42;
 
     private List<Coordinate> walls = new ArrayList<>();
     private List<Coordinate> snake = new ArrayList<>();
 
-    private Direction CurrentDirection = Direction.East;
+    public static Direction CurrentDirection = Direction.East;
 
     private GameState currentGameState = GameState.Running;
 

@@ -5,8 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 
+import com.example.chory.snakes.engine.GameEngine;
+import com.example.chory.snakes.enums.Direction;
 import com.example.chory.snakes.enums.TileType;
 
 /**
@@ -59,4 +63,38 @@ public class SnakeView extends View{
             }
         }
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        float x = event.getX();
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            if(x > GameEngine.GameWidth/2){
+                if (GameEngine.CurrentDirection == Direction.North){
+                    GameEngine.CurrentDirection = Direction.West;
+                } else if (GameEngine.CurrentDirection == Direction.East){
+                    GameEngine.CurrentDirection = Direction.North;
+                } else if (GameEngine.CurrentDirection == Direction.South){
+                    GameEngine.CurrentDirection = Direction.East;
+                } else {
+                    GameEngine.CurrentDirection = Direction.South;
+                }
+            }
+            else if(x < GameEngine.GameWidth/2){
+                if(x > GameEngine.GameWidth/2){
+                    if (GameEngine.CurrentDirection == Direction.North){
+                        GameEngine.CurrentDirection = Direction.East;
+                    } else if (GameEngine.CurrentDirection == Direction.East){
+                        GameEngine.CurrentDirection = Direction.South;
+                    } else if (GameEngine.CurrentDirection == Direction.South){
+                        GameEngine.CurrentDirection = Direction.West;
+                    } else {
+                        GameEngine.CurrentDirection = Direction.North;
+                    }
+                }
+            }
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
 }
